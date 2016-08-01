@@ -30,5 +30,8 @@ else
     MESSAGE="$(cat -)"
 fi
 
+# Convert any garbage into valid JSON
+MESSAGE=${MESSAGE//\"/\\\"}
+
 # Actually send the data to Slack
 curl -X POST -d "payload={\"text\": \"${MESSAGE}\"}" ${SLACK_URL}
